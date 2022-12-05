@@ -47,12 +47,12 @@ function Invoke-PostInstall {
     Set-Volume -DriveLetter C -NewFileSystemLabel $OSDriveLabel
 
     # WARNING: This is highly specific to my set up as I have a second disk I use for storage
-    # Get-Disk -FriendlyName "Apple*" | New-Partition -UseMaximumSize -DriveLetter D | Format-Volume -FileSystem NTFS -NewFileSystemLabel "STORAGE"
+    #Get-Disk -FriendlyName "Apple*" | New-Partition -UseMaximumSize -DriveLetter D | Format-Volume -FileSystem NTFS -NewFileSystemLabel "STORAGE"
 
     # Download and install Windows Admin Center - Only if you want to administrate via HTTP(s)
     # INFO: You generally only need to install this on one server to rule them all
-    # Start-BitsTransfer -Source "https://go.microsoft.com/fwlink/p/?linkid=2194936" -Destination "C:\Windows\Temp\WindowsAdminCenter.msi"
-    # msiexec /i C:\Windows\Temp\WindowsAdminCenter.msi /qn /L*v C:\Windows\Temp\WindowsAdminCenter.log SME_PORT=443 SSL_CERTIFICATE_OPTION=generate
+    #Start-BitsTransfer -Source "https://go.microsoft.com/fwlink/p/?linkid=2194936" -Destination "C:\Windows\Temp\WindowsAdminCenter.msi"
+    #msiexec /i C:\Windows\Temp\WindowsAdminCenter.msi /qn /L*v C:\Windows\Temp\WindowsAdminCenter.log SME_PORT=443 SSL_CERTIFICATE_OPTION=generate
 
     # Enable incoming ICMP (ping)
     New-NetFirewallRule -DisplayName "Networking - Echo Request (ICMPv4-In)" -Direction Inbound -Action Allow -Enabled True -Profile Public -Protocol "ICMPv4" -IcmpType 8 -Group "File and Printer Sharing"
