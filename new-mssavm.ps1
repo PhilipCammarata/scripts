@@ -1,4 +1,4 @@
-function New-CammVM {
+function New-MSSAVM {
     [CmdletBinding()]
     param (
         #[Parameter(Mandatory)]
@@ -37,4 +37,4 @@ function New-CammVM {
 
 $ServerList = ("WS2022-SERVER01","WS2022-SERVER02","WS2022-SERVER03")
 
-$ServerList | New-CammVM
+$ServerList | New-MSSAVM
