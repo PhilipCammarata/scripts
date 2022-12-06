@@ -119,4 +119,4 @@ function New-MSSAVM {
     }
 }
 
-Export-ModuleMember -Function New-MSSAVM, Invoke-PostInstall
+Export-ModuleMember -Function New-MSSAVM, Invoke-MSSAPostInstall
