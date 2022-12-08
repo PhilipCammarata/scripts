@@ -45,6 +45,8 @@ function New-MSSAVM {
     }
 }
 
-New-MSSAVM -VMName "WS2022-MEMBER"
+$NewServers = @("WS2022-SERVER1", "WS2022-SERVER2", "WS2022-SERVER3")
 
-# Invoke-Command -FilePath .\New-MSSAVM.ps1 -ComputerName OCTOPUS
+$NewServers | New-MSSAVM
+
+#Invoke-Command -FilePath .\New-MSSAVM.ps1 -ComputerName OCTOPUS
