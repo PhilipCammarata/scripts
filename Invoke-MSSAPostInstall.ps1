@@ -69,13 +69,16 @@ function Invoke-MSSAPostInstall {
     # Confirm InterfaceIndex/InterfaceAlias to make sure the correct interface adapter is being set
     Write-Host "Setting the IP to $IPAddress/24 with a default gateway of $DefaultGateway and DNS of $DNSAddress"
     $Interface = Get-NetIPAddress -InterfaceAlias $InterfaceAlias -AddressFamily IPv4
-    $Interface | New-NetIPAddress -IPAddress $IPAddress -PrefixLength 24 -DefaultGateway $DefaultGateway | Out-Null
+    $Interface | New-NetIPAddress -IPAddress $IPAddress -PrefixLength 24 -DefaultGateway $DefaultGateway
     $Interface | Set-DnsClientServerAddress -ServerAddresses $DNSAddresses
 
-    Write-Host "Restarting $Hostname"
 
-    # remove the existing dns server *first*
-    #Add-Computer -DomainName "mssa" -NewName $HostName -Credential "mssa\pcammarata" -Restart
+    Write-Host "Rebooting $Hostname"
+    Restart-Computer -Force
+
+    # WIP: Add machien to domain
+    #Write-Host "Joining $Hostname to the MSSA Domain and restarting."
+    #Add-Computer -DomainName "mssa.cammarata.me" -NewName $HostName -Credential "mssa\pcammarata" -Restart
 }
 
 Invoke-MSSAPostInstall -HostName "WS2022-MEMBER" -LocalAdministrator "pcammarata" -InterfaceAlias "Ethernet" -IPAddress "192.168.42.12" -DefaultGateway "192.168.42.1" -DNSAddresses "192.168.42.11" 
